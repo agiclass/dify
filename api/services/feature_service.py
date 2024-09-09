@@ -54,7 +54,7 @@ class FeatureService:
             cls._fulfill_params_from_billing_api(features, tenant_id)
         features.can_replace_logo = True
         # features.model_load_balancing_enabled = True
-        features.dataset_operator_enabled = True
+        # features.dataset_operator_enabled = True
         features.members = LimitationModel(0,10000)
         features.apps = LimitationModel(0,10000)
         features.vector_space = LimitationModel(0,10000)
