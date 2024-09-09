@@ -40,7 +40,7 @@ class BaseApiKeyListResource(Resource):
     resource_model = None
     resource_id_field = None
     token_prefix = None
-    max_keys = 10
+    max_keys = 0
 
     @marshal_with(api_key_list)
     def get(self, resource_id):

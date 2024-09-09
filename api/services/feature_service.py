@@ -53,7 +53,10 @@ class FeatureService:
 
         if dify_config.BILLING_ENABLED:
             cls._fulfill_params_from_billing_api(features, tenant_id)
+        
 
+
+        features.can_replace_logo = True
         return features
 
     @classmethod
