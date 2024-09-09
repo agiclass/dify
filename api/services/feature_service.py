@@ -28,9 +28,9 @@ class FeatureModel(BaseModel):
     annotation_quota_limit: LimitationModel = LimitationModel(size=0, limit=10)
     documents_upload_quota: LimitationModel = LimitationModel(size=0, limit=50)
     docs_processing: str = "standard"
-    can_replace_logo: bool = False
-    model_load_balancing_enabled: bool = False
-    dataset_operator_enabled: bool = False
+    can_replace_logo: bool = True
+    model_load_balancing_enabled: bool =True 
+    dataset_operator_enabled: bool = True
 
     # pydantic configs
     model_config = ConfigDict(protected_namespaces=())
@@ -48,12 +48,17 @@ class FeatureService:
     @classmethod
     def get_features(cls, tenant_id: str) -> FeatureModel:
         features = FeatureModel()
-
         cls._fulfill_params_from_env(features)
 
         if dify_config.BILLING_ENABLED:
             cls._fulfill_params_from_billing_api(features, tenant_id)
-
+        features.can_replace_logo = True
+        features.model_load_balancing_enabled = True
+        features.dataset_operator_enabled = True
+        features.members = LimitationModel(0,10000)
+        features.apps = LimitationModel(0,10000)
+        features.vector_space = LimitationModel(0,10000)
+    
         return features
 
     @classmethod
