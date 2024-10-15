@@ -109,8 +109,7 @@ const AppDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
     setAppDetail()
     fetchAppDetail({ url: '/apps', id: appId }).then((res) => {
       // redirection
-      const canIEditApp = isCurrentWorkspaceEditor
-      if (!canIEditApp && (pathname.endsWith('configuration') || pathname.endsWith('workflow') || pathname.endsWith('logs'))) {
+      if (!isCurrentWorkspaceEditor && (pathname.endsWith('configuration') || pathname.endsWith('workflow') || pathname.endsWith('logs'))) {
         router.replace(`/app/${appId}/overview`)
         return
       }
@@ -122,8 +121,8 @@ const AppDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
       }
       else {
         setAppDetail({ ...res, enable_sso: false })
-        setNavigation(getNavigations(appId, canIEditApp, res.mode))
-        if (systemFeatures.enable_web_sso_switch_component && canIEditApp) {
+        setNavigation(getNavigations(appId, isCurrentWorkspaceEditor, res.mode))
+        if (systemFeatures.enable_web_sso_switch_component && isCurrentWorkspaceEditor) {
           fetchAppSSO({ appId }).then((ssoRes) => {
             setAppDetail({ ...res, enable_sso: ssoRes.enabled })
           })
