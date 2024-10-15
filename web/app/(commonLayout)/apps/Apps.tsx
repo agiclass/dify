@@ -137,7 +137,7 @@ const Apps = () => {
         </div>
       </div>
       <nav className='grid content-start grid-cols-1 gap-4 px-12 pt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grow shrink-0'>
-        {isCurrentWorkspaceEditor
+        {(isCurrentWorkspaceEditor)
           && <NewAppCard onSuccess={mutate} />}
         {data?.map(({ data: apps }) => apps.map(app => (
           <AppCard key={app.id} app={app} onRefresh={mutate} />
