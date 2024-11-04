@@ -10,8 +10,7 @@ from models.dataset import Dataset
 from models.model import ApiToken, App
 
 from . import api
-from .setup import setup_required
-from .wraps import account_initialization_required
+from .wraps import account_initialization_required, setup_required
 
 api_key_fields = {
     "id": fields.String,
@@ -40,7 +39,7 @@ class BaseApiKeyListResource(Resource):
     resource_model = None
     resource_id_field = None
     token_prefix = None
-    max_keys = 10
+    max_keys = 0
 
     @marshal_with(api_key_list)
     def get(self, resource_id):
