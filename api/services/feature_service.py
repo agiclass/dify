@@ -85,7 +85,7 @@ class FeatureService:
 
         cls._fulfill_system_params_from_env(system_features)
 
-        if dify_config.ENTERPRISE_ENABLED:
+        if dify_config.ENTERPRISE_ENABLED and False:
             system_features.enable_web_sso_switch_component = True
 
             cls._fulfill_params_from_enterprise(system_features)
