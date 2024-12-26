@@ -188,6 +188,8 @@ class FeatureService:
             system_features.branding.enabled = True
             system_features.webapp_auth.enabled = True
             system_features.enable_change_email = False
+        if dify_config.ENTERPRISE_ENABLED and False:
+            system_features.enable_web_sso_switch_component = True
             cls._fulfill_params_from_enterprise(system_features)
 
         if dify_config.MARKETPLACE_ENABLED:
