@@ -53,7 +53,6 @@ class BaseApiKeyListResource(Resource):
     resource_id_field: str | None = None
     token_prefix: str | None = None
     max_keys = 10
-
     @marshal_with(api_key_list)
     def get(self, resource_id):
         assert self.resource_id_field is not None, "resource_id_field must be set"
