@@ -41,7 +41,6 @@ class PassportResource(Resource):
             app_settings = EnterpriseService.WebAppAuth.get_app_access_mode_by_code(app_code=app_code)
             if not app_settings or not app_settings.access_mode == "public":
                 raise WebAppAuthRequiredError()
-
         # get site from db and check if it is normal
         site = db.session.scalar(select(Site).where(Site.code == app_code, Site.status == "normal"))
         if not site:
