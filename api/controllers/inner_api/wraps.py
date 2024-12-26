@@ -3,7 +3,7 @@ from functools import wraps
 from hashlib import sha1
 from hmac import new as hmac_new
 
-from flask import abort, request
+from flask import abort, request, current_app
 
 from configs import dify_config
 from extensions.ext_database import db
@@ -13,11 +13,14 @@ from models.model import EndUser
 def inner_api_only(view):
     @wraps(view)
     def decorated(*args, **kwargs):
+        current_app.logger.info(f"dify_config.INNER_API: {dify_config.INNER_API}")
+        current_app.logger.info(f"dify_config.INNER_API_KEY: {dify_config.INNER_API_KEY}")
         if not dify_config.INNER_API:
             abort(404)
 
         # get header 'X-Inner-Api-Key'
         inner_api_key = request.headers.get("X-Inner-Api-Key")
+        current_app.logger.info(f"inner_api_key: {inner_api_key}")
         if not inner_api_key or inner_api_key != dify_config.INNER_API_KEY:
             abort(401)
 
