@@ -39,7 +39,7 @@ class BaseApiKeyListResource(Resource):
     resource_model = None
     resource_id_field = None
     token_prefix = None
-    max_keys = 0
+    # max_keys = 0
 
     @marshal_with(api_key_list)
     def get(self, resource_id):
@@ -65,10 +65,15 @@ class BaseApiKeyListResource(Resource):
             .count()
         )
 
-        if current_key_count >= self.max_keys:
+        if current_user.is_admin_or_owner:
+            max_keys = 10
+        else:
+            max_keys = 0
+
+        if current_key_count >= max_keys:
             flask_restful.abort(
                 400,
-                message=f"Cannot create more than {self.max_keys} API keys for this resource type.",
+                message=f"Cannot create more than {max_keys} API keys for this resource type.",
                 code="max_keys_exceeded",
             )
 
