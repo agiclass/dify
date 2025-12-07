@@ -3,9 +3,6 @@ const translation = {
     welcome: 'आपका स्वागत है',
     appUnavailable: 'ऐप उपलब्ध नहीं है',
     appUnknownError: 'अज्ञात त्रुटि, कृपया पुनः प्रयास करें',
-    // @ts-expect-error TODO: fix this
-
-    appUnknownError: 'ऐप अनुपलब्ध है',
   },
   chat: {
     newChat: 'नया चैट',
@@ -77,8 +74,9 @@ const translation = {
         'रॉ {{rowIndex}}: {{varName}} मान {{maxLength}} वर्णों से अधिक नहीं हो सकता',
       atLeastOne: 'कृपया अपलोड की गई फ़ाइल में कम से कम एक पंक्ति भरें।',
     },
-    execution: 'अनु执行',
-    executions: '{{num}} फाँसी',
+    execution: 'चलाएं',
+    executions: '{{num}} बार चलाएं',
+    stopRun: 'निष्पादन रोकें',
   },
   login: {
     backToHome: 'होम पर वापस',
